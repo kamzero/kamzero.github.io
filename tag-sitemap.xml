@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://kamzero.cn/tags/ZJU/</loc>
+        <lastmod>2019-10-17T10:49:10.592Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://kamzero.cn/tags/C/</loc>
+        <lastmod>2019-10-17T10:49:10.592Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://kamzero.cn/tags/CG/</loc>
+        <lastmod>2019-10-17T10:49:10.592Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://kamzero.cn/tags/UI/</loc>
         <lastmod>2019-09-16T11:10:10.143Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +32,6 @@
 
     <url>
         <loc>https://kamzero.cn/tags/PyQt5/</loc>
-        <lastmod>2019-09-16T11:10:10.143Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://kamzero.cn/tags/C/</loc>
         <lastmod>2019-09-16T11:10:10.143Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -109,13 +123,6 @@
 
     <url>
         <loc>https://kamzero.cn/tags/C%E5%A4%A7%E7%A8%8B/</loc>
-        <lastmod>2019-08-19T11:43:10.187Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://kamzero.cn/tags/ZJU/</loc>
         <lastmod>2019-08-19T11:43:10.187Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
