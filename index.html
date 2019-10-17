@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          kamzero
+        
+    </title>
+
+    <link rel="canonical" href="https://kamzero.cn/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/header_img/home-bg-2-dark.png') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>kamzero&#39;s Blog</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">This is JIAO&#39;s home</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">kamzero&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2019/08/28/No-2-Discovering-Groups/">
+        <h2 class="post-title">
+            No.2 聚类-发现群组 Discovering Groups
+        </h2>
+        <h3 class="post-subtitle">
+             Programming Collective Intelligence No.2  
+        </h3>
+        <div class="post-content-preview">
+            Programming Collective Intelligence No.2 聚类-发现群组
+前言
+前天花了大半天时间实现了推荐系统之后，昨天主要在看书、学英语，虽然纯看书效率不高，但是保持一天输入一天输出的节奏还是相对比较合理的。既然有了想做的事，就保持专注吧。
+昨天浏览了大半本《集体智慧编程》，对书中所要讲述的内容已经有了全面的了解。第三章是讲聚类，第四章搭建搜索引擎，都是比较有趣的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-08-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#cs" title="cs">cs</a>
+            
+              <a href="/tags/#Python" title="Python">Python</a>
+            
+              <a href="/tags/#ML" title="ML">ML</a>
+            
+              <a href="/tags/#集体智慧编程" title="集体智慧编程">集体智慧编程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/08/25/No-1-Making-Recommendations/">
+        <h2 class="post-title">
+            No.1 推荐系统 Making Recommendations
+        </h2>
+        <h3 class="post-subtitle">
+             Programming Collective Intelligence No.1  
+        </h3>
+        <div class="post-content-preview">
+            Programming Collective Intelligence No.1 推荐系统
+前言
+前几天和老师交流过，不推荐一上来就接触深度学习和神经网络，而应该先打好机器学习的基础。我在五月份已经看完了整本《基于python的深度学习入门》，这是一位日本人写的书，风格与众不同，很适合用来入门。虽然已经基本理解神经网络、误差反向传播等相关概念，但是尚没有动手实践其中的算法，而且看到一些实践技......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-08-25
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#cs" title="cs">cs</a>
+            
+              <a href="/tags/#Python" title="Python">Python</a>
+            
+              <a href="/tags/#ML" title="ML">ML</a>
+            
+              <a href="/tags/#集体智慧编程" title="集体智慧编程">集体智慧编程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/08/22/久违的夏天/">
+        <h2 class="post-title">
+            久违的夏天
+        </h2>
+        <h3 class="post-subtitle">
+             关于游泳的故事 
+        </h3>
+        <div class="post-content-preview">
+            游泳那些事儿
+昨天试航紫金港露天游泳池，除过人略微有点多，而且向各个方向游的人都有之外，体验不错。大概有三四年，我没有下水游过泳了（游泳池开放的日子学校依然在上课…）。久违的体验让我有了一种暑假的实感，在水中真真切切地感受到自由。运动可以提升注意力的阙值，使人专注，适合作为学习和工作之余的调剂，希望在之后的日子里，我的运动不止局限于打卡吧。
+free style
+说来惭愧，学会蛙泳之后，11......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-08-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#动漫" title="动漫">动漫</a>
+            
+              <a href="/tags/#随想" title="随想">随想</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/08/20/如迷的解密者/">
+        <h2 class="post-title">
+            如迷的解密者
+        </h2>
+        <h3 class="post-subtitle">
+             读《艾伦·图灵传》 
+        </h3>
+        <div class="post-content-preview">
+            阅读：《艾伦·图灵传》
+一口气读完了上册。或许是专业上的原因，打一开始便怀着一种莫名的姨母心态，看着一个自闭而独特的男孩笨拙地与外界和解，在战乱的年代里戴着对同性恋歧视的枷锁生存， 以及，做出了众所周知或不为人知的重要研究。在当代，图灵，这个广为人知的计算机之父，是一位智慧的先驱，一座永远的丰碑，更像是一个抽象的符号。在这本传记中，我们看到的则是一个鲜活而灵动的青年。从还原历史现场、关怀历史......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-08-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#随想" title="随想">随想</a>
+            
+              <a href="/tags/#book" title="book">book</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/08/18/关于大程pic-miner的思考/">
+        <h2 class="post-title">
+            关于大程pic-miner的思考
+        </h2>
+        <h3 class="post-subtitle">
+             调用图片的尝试及反思 
+        </h3>
+        <div class="post-content-preview">
+            关于大程的一些思考
+关于图片的尝试
+​	选题之初，我们极少考虑实现的细节，只是想着选一个有趣的题目，就自己找了黄金矿工这个题目。当夏学期开始，我开始思考实现细节，才发现，不规则的矿和长相生动的矿工要求我们必须可以调用图片，自己画的话效果会大打折扣。于是，我开始了调用图片的探索之路。
+​	最初的想法是找库，我试用了xege库，了解了其中调用图片的细节。ege库中可以创建一种PIMAGE类型，有......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-08-18
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#C" title="C">C</a>
+            
+              <a href="/tags/#ZJU" title="ZJU">ZJU</a>
+            
+              <a href="/tags/#cs" title="cs">cs</a>
+            
+              <a href="/tags/#C大程" title="C大程">C大程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/08/13/位运算/">
+        <h2 class="post-title">
+            位运算
+        </h2>
+        <h3 class="post-subtitle">
+            2019春夏 程序设计专题 复盘
+        </h3>
+        <div class="post-content-preview">
+            位运算
+数据的存储
+整数数据的存储
+
+符号位
+
+最高位，最左边一位
+
+
+正数
+
+原码、反码、补码相同
+符号位为0，其余各位表示数值
+两个字节(2*8位，其中一位符号位)的存储单元，最大能表示正数2^15-1
+
+
+负数
+
+原码、补码、反码不同
+负数的原码
+
+符号位为1
+其余各位表示数值的绝对值
+
+
+反码
+
+符号位是1
+其余各位对原码取反
+
+
+补码
+
+反码加1
+
+
+两个字节(2*8位，其中一位符......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-08-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#ZJU" title="ZJU">ZJU</a>
+            
+              <a href="/tags/#cs" title="cs">cs</a>
+            
+              <a href="/tags/#C大程" title="C大程">C大程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/08/11/数值计算方法在风洞翼型实验中的应用/">
+        <h2 class="post-title">
+            数值计算方法在风洞翼型实验中的应用
+        </h2>
+        <h3 class="post-subtitle">
+             计算翼型升力系数 
+        </h3>
+        <div class="post-content-preview">
+            前言
+​	夏学期选课阶段，莫得课上的我选了一堆奇怪的个性课，其中就有控制学院的数值计算方法。选中而错过退课的时候很虚，一来我没有修过常微分方程，常微分是这门课的预修课程，二来计院的相关课程数值分析在大二上开设，我还没有修过。硬着头皮上的时候发现，内容是很有意义的，作业和报告是很多的，控院的选修课是很水的…
+​	Numerical Method 是研究分析用计算机求解数学计算问题的数值计算方法......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-08-11
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#ZJU" title="ZJU">ZJU</a>
+            
+              <a href="/tags/#cs" title="cs">cs</a>
+            
+              <a href="/tags/#Numerical Method" title="Numerical Method">Numerical Method</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/07/21/Newsletter-Bone-Marrow-Transplantation/">
+        <h2 class="post-title">
+            [Bio] Bone Marrow Transplantation
+        </h2>
+        <h3 class="post-subtitle">
+             Newsletter 
+        </h3>
+        <div class="post-content-preview">
+            
+
+15th July
+
+LIFE - Our Newspaper Name Decision
+
+16th July
+
+
+PRESS CONFRENCE
+
+
+INTERVIEW
+
+
+20th July
+
+WRITE THE NEWSLETTER
+
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-07-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#HKU" title="HKU">HKU</a>
+            
+              <a href="/tags/#Biology" title="Biology">Biology</a>
+            
+              <a href="/tags/#other" title="other">other</a>
+            
+              <a href="/tags/#Newsletter" title="Newsletter">Newsletter</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/07/16/Cartoon-Living-with-Stem-Cell/">
+        <h2 class="post-title">
+            [Bio] Living with Stem Cell
+        </h2>
+        <h3 class="post-subtitle">
+             Cartoon 
+        </h3>
+        <div class="post-content-preview">
+            
+It’s my homework for hku course, living with stem cell. I worked with Mrs.DONG to draw a cartoon and express the idea of stem cell.
+&quot; At first we were interested in the formation of the scars......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-07-16
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#HKU" title="HKU">HKU</a>
+            
+              <a href="/tags/#Biology" title="Biology">Biology</a>
+            
+              <a href="/tags/#Cartoon" title="Cartoon">Cartoon</a>
+            
+              <a href="/tags/#other" title="other">other</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/07/16/C大程复盘/">
+        <h2 class="post-title">
+            C语言-那些值得注意的事
+        </h2>
+        <h3 class="post-subtitle">
+             2019春夏-程序设计专题 复盘 
+        </h3>
+        <div class="post-content-preview">
+            那些犯过的错误
+编译错误与运行错误
+
+编译错误
+
+多为语法错误
+
+
+运行错误
+
+逻辑上的错误
+包括没有定义变量
+
+
+
+关于变量的存储与生命周期
+
+全局变量和静态变量放在全局区，也称静态区，不放在堆区或栈区，故不会引起堆栈溢出
+设计和使用访问动态全局变量、静态全局变量、静态局部变量的函数时，需要考虑重入问题，因为他们都放在静态数据存储区，全局可见
+函数中必须要使用static变量情况:比如当某......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by kamzero on
+            2019-07-16
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#ZJU" title="ZJU">ZJU</a>
+            
+              <a href="/tags/#cs" title="cs">cs</a>
+            
+              <a href="/tags/#C语言" title="C语言">C语言</a>
+            
+              <a href="/tags/#C大程" title="C大程">C大程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    
+        <li class="next">
+            <a href="/archives/2/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#ZJU" title="ZJU" rel="4">ZJU</a>
+            
+        
+            
+            <a href="/tags/#HKU" title="HKU" rel="2">HKU</a>
+            
+        
+            
+            <a href="/tags/#Biology" title="Biology" rel="2">Biology</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#other" title="other" rel="2">other</a>
+            
+        
+            
+            <a href="/tags/#cs" title="cs" rel="7">cs</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#C大程" title="C大程" rel="3">C大程</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Python" title="Python" rel="3">Python</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#随想" title="随想" rel="2">随想</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#ML" title="ML" rel="2">ML</a>
+            
+        
+            
+            <a href="/tags/#集体智慧编程" title="集体智慧编程" rel="2">集体智慧编程</a>
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/ironman-draw.png" />
+        
+
+        
+            <p>Hi, I&#39;m JIAO Sherry</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/kamliezero">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/kamzero">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2019/08/28/No-2-Discovering-Groups/">No.2 聚类-发现群组 Discovering Groups</a>
+        </li>
+      
+        <li>
+          <a href="/2019/08/25/No-1-Making-Recommendations/">No.1 推荐系统 Making Recommendations</a>
+        </li>
+      
+        <li>
+          <a href="/2019/08/22/久违的夏天/">久违的夏天</a>
+        </li>
+      
+        <li>
+          <a href="/2019/08/20/如迷的解密者/">如迷的解密者</a>
+        </li>
+      
+        <li>
+          <a href="/2019/08/18/关于大程pic-miner的思考/">关于大程pic-miner的思考</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://fenghe.us" target="_blank">Fenghe</a></li>
+    
+        <li><a href="http://www.c01dkit.com/" target="_blank">柷敔</a></li>
+    
+        <li><a href="http://dingzhi.ga/" target="_blank">DingZhi</a></li>
+    
+</ul>
+
+        <hr>
+    
+        
+    <h5>ARCHIVES</h5>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+        <hr>
+    
+        <!-- Categories -->
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/kamliezero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/kamzero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; kamzero 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://kamzero.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-144253754-1';
+    var _gaDomain = 'undefined';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '8e768ea7fd18877f581950076f9ac0cb';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://kamzero.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

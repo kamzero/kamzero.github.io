@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          No.1 推荐系统 Making Recommendations - kamzero
+        
+    </title>
+
+    <link rel="canonical" href="https://kamzero.cn/2019/08/25/No-1-Making-Recommendations/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('1.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#cs" title="cs">cs</a>
+                            
+                              <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                            
+                              <a class="tag" href="/tags/#ML" title="ML">ML</a>
+                            
+                              <a class="tag" href="/tags/#集体智慧编程" title="集体智慧编程">集体智慧编程</a>
+                            
+                        </div>
+                        <h1>No.1 推荐系统 Making Recommendations</h1>
+                        <h2 class="subheading"> Programming Collective Intelligence No.1  </h2>
+                        <span class="meta">
+                            Posted by kamzero on
+                            2019-08-25
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">kamzero&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="programming-collective-intelligence-no1-推荐系统">Programming Collective Intelligence No.1 推荐系统</span></h1>
+<h2><span id="前言">前言</span></h2>
+<p>前几天和老师交流过，不推荐一上来就接触深度学习和神经网络，而应该先打好机器学习的基础。我在五月份已经看完了整本《基于python的深度学习入门》，这是一位日本人写的书，风格与众不同，很适合用来入门。虽然已经基本理解神经网络、误差反向传播等相关概念，但是尚没有动手实践其中的算法，而且看到一些实践技巧和流行算法时有点较懵，索性暂时搁置。之前被人推荐了《集体智慧编程》，<em>Programming Collective Intelligence</em>，五月份去图书馆借过英文影印版，可惜读起来有些困难，后来买了中文版，尚未看过。这本书适合用来进一步熟悉Python并打好机器学习的基础，很符合我现在的需求，于是毅然甩下其他锅刷起这本书。我并不是一个媒体人，不是说那些名词理解了就好了，而是一个计算机专业的学生，未来会成为一名工程师或是研究人员，理解只是最低的要求。如果说七月份的时候我生出了一种职业生涯要起步了的感觉，现在则是完全改变了学习的态度，我不再追求应用那些先进的工具、做出看起来最厉害的事情、学习那些五花八门的名词，而是专注于理解、实践每一个算法，用最简单的工具搞事情，同时提高整体的编程能力。</p>
+<p>Time is relative, okay? It can stretch and it can squeeze, but…it can’t run backwards. It just can’t.时间可以伸缩和折叠，唯独不能倒退。时间是一场旅行，更像是一种投资，其精髓在于在最合适的时间选择做最合适的事情，以期获得最大的效益。因而，可以做的事情那么多，并不是每一件都要现在去做，并不是所有东西都要现在学，静下心来拿脑子想想，做出当前看来最合理的安排与选择。</p>
+<p>以前高中搞OI的时候，同机房的松鼠非常骄傲地说：“我虽然AC掉的题不多，但是我每道题都是自己写的呀。”希望我在打基础阶段也可以自豪地说：“我虽然做的东西并不前沿，但是每一个函数都是我自己写过的，每一个细节都是我推敲过的。”还有一句话是，真正的厉害，是对看似简单的东西融会贯通。</p>
+<p>与诸位共勉，开始吧！</p>
+<h2><span id="提供推荐的系统">提供推荐的系统</span></h2>
+<h3><span id="概述">概述</span></h3>
+<p>以前，我们想要看电影、听音乐、购买商品，会先向他人询问。然而随着择越来越多，要想通过询问一小群人来确定我们想要的东西 将会变得越来越不切实际， 因为他们可能并不了解所有的选择。因而，发展出了一种协作型过滤的技术，根据群体偏好来为人们提供推荐，有许多针对于此的应用，如：在线购物中的商品推荐、热门网站的推荐，以及帮助人们寻找音乐和影片的应用。</p>
+<h3><span id="搜集偏好">搜集偏好</span></h3>
+<p>我们需要寻找一种方式，来表达不同的人及其偏好。当数据规模较大时，应该将数据存入数据库中。而对于规模较小的数据集，在Python中可以使用嵌套的字典。</p>
+<h3><span id="寻找相近的用户相似度评价值">寻找相近的用户——相似度评价值</span></h3>
+<p>在数值计算中，范数的选取会一定程度影响收敛效果，而神经网络中损失函数的选取也会影响学习率。正如高考选拔人才的方式会影响整个国家的基础教育一样，评价标准、衡量方法会带来不同的实际效果。不过，没有一种方法是绝对好的，使用哪一种方法最优，完全取决于具体的应用。</p>
+<h4><span id="欧几里得距离">欧几里得距离</span></h4>
+<p>这是最好理解的一种评价方法，供人评价的每种物品为一个坐标轴，将参与评价的人按其评分绘制在图上，对于任意两人，计算出每一轴向上的差值，求平方后相加，对总和取平方根。然而我们<strong>希望偏好越相近相似值越大，将函数值加1（避免被零除），并取其倒数，得到一个返回值介于0和1直接的函数。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Returns a distance-based similarity score for person1 and person2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sim_distance</span><span class="params">(prefs,person1,person2)</span>:</span></span><br><span class="line">  <span class="comment"># Get the list of shared_items</span></span><br><span class="line">  si=&#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person1]: </span><br><span class="line">    <span class="keyword">if</span> item <span class="keyword">in</span> prefs[person2]: si[item]=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># if they have no ratings in common, return 0</span></span><br><span class="line">  <span class="keyword">if</span> len(si)==<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Add up the squares of all the differences</span></span><br><span class="line">  sum_of_squares=sum([pow(prefs[person1][item]-prefs[person2][item],<span class="number">2</span>) </span><br><span class="line">                      <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person1] <span class="keyword">if</span> item <span class="keyword">in</span> prefs[person2]])</span><br><span class="line">  <span class="comment"># 示例代码这行有bug，已修正</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+sqrt(sum_of_squares))</span><br></pre></td></tr></table></figure>
+<h4><span id="皮尔逊相关度">皮尔逊相关度</span></h4>
+<p>使用欧几里得距离时有一个问题，我们求得的偏好值会受到人们打分标准的影响——有的人较为宽松，有的人则很严格。我们想要了解两个人偏好的相似度，应该剔除数据不规范造成的误差，<u>修正“夸大分值”</u>，在这一点上，较为复杂的皮尔逊相关度优于欧几里得距离。</p>
+<p>我们在平面上定位各个影片，以《Superman》为例，假如A评价3分，B评价5分，那么这部影片就被定位在(3,5)处。将所有影片都如此定位之后，我们得到了一张散点图，我们可以用最小二乘法对此进行拟合，绘制出一条直线，即最佳拟合线。而相关系数，这个在高中课本中被孤零零地介绍过的概念，可以用来衡量直线对散点的拟合程度，也可表示最佳拟合线下两者的相关程度。高中时介绍过两个公式，当时必须手算，现在写成代码就好了，实在是幸福。</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/86c6b669f6b937c12ba7e0d1afce559904c5a092" alt="{\displaystyle r={\frac {\sum \limits {i=1}^{n}(X{i}-{\overline {X}})(Y_{i}-{\overline {Y}})})^{2}}}{\sqrt {\sum \limits {i=1}^{n}(Y{i}-{\overline {Y}})^{2}}}}}}"></p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9141c78c4650d430fac01ddbc57f7366d48e6f6a" alt="{\displaystyle r={\frac {1}{n-1}}\sum \limits {i=1}^{n}\left({\frac {X{i}-{\overline {X}}}{\sigma {X}}}\right)\left({\frac {Y{i}-{\overline {Y}}}{\sigma _{Y}}}\right)}"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Returns the Pearson correlation coefficient for p1 and p2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sim_pearson</span><span class="params">(prefs,p1,p2)</span>:</span></span><br><span class="line">  <span class="comment"># Get the list of mutually rated items</span></span><br><span class="line">  si=&#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> item <span class="keyword">in</span> prefs[p1]: </span><br><span class="line">    <span class="keyword">if</span> item <span class="keyword">in</span> prefs[p2]: si[item]=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># if they are no ratings in common, return 0</span></span><br><span class="line">  <span class="keyword">if</span> len(si)==<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Sum calculations</span></span><br><span class="line">  n=len(si)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Sums of all the preferences</span></span><br><span class="line">  sum1=sum([prefs[p1][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line">  sum2=sum([prefs[p2][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Sums of the squares</span></span><br><span class="line">  sum1Sq=sum([pow(prefs[p1][it],<span class="number">2</span>) <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line">  sum2Sq=sum([pow(prefs[p2][it],<span class="number">2</span>) <span class="keyword">for</span> it <span class="keyword">in</span> si])	</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Sum of the products</span></span><br><span class="line">  pSum=sum([prefs[p1][it]*prefs[p2][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Calculate r (Pearson score)</span></span><br><span class="line">  num=pSum-(sum1*sum2/n)</span><br><span class="line">  den=sqrt((sum1Sq-pow(sum1,<span class="number">2</span>)/n)*(sum2Sq-pow(sum2,<span class="number">2</span>)/n))</span><br><span class="line">  <span class="keyword">if</span> den==<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  r=num/den</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> r</span><br></pre></td></tr></table></figure>
+<h4><span id="其他相似性度量法">其他相似性度量法</span></h4>
+<h5><span id="jaccard系数">Jaccard系数</span></h5>
+<p>Jaccard（杰卡德）系数主要用于计算样本间的相似度。Jaccard系数的计算方式为：样本交集个数和样本并集个数的比值，用J(A,B)表示。公式为：</p>
+<p><img src="https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D252/sign=750524a567061d957946303d49f50a5d/8644ebf81a4c510f05fdbf876959252dd42aa576.jpg" alt="è¿éåå¾çæè¿°"></p>
+<p>jaccard系数相反的即为jaccard距离，用两个集合中不同元素所占元素的比例来衡量两个样本之间的相似度，公式为：</p>
+<p><img src="https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D341/sign=b209dbd3c38065387feaa217a6dca115/b58f8c5494eef01f1b334658e9fe9925bc317d03.jpg" alt="è¿éåå¾çæè¿°"></p>
+<h5><span id="曼哈顿距离算法">曼哈顿距离算法</span></h5>
+<p>这也是一个非常常见的名词，纽约的市政规划做得很迷，曼哈顿区非常繁华，高楼林立，每个街区大小相近、四四方方，十分规整。因此，驾车在城市中行驶，往往是走折线，这也就是曼哈顿距离的来源。在中控杯中，不太厉害的队伍只能靠巡方格的边线来前进、定位，这时候走的最短距离就是曼哈顿距离。用来衡量相似度，加一求倒数即可。</p>
+<h5><span id="参考与补充">参考与补充</span></h5>
+<p>网上有朋友整理了多达18种相似度计算方法。</p>
+<p><a href="https://en.wikipedia.org/wiki/Metric_%28mathematics%29#Examples" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Metric_(mathematics)#Examples</a></p>
+<p><a href="https://blog.csdn.net/solomonlangrui/article/details/47454805" target="_blank" rel="noopener">https://blog.csdn.net/solomonlangrui/article/details/47454805</a></p>
+<p><a href="https://www.cnblogs.com/AlvinSui/p/8931074.html" target="_blank" rel="noopener">https://www.cnblogs.com/AlvinSui/p/8931074.html</a></p>
+<h3><span id="提供推荐">提供推荐</span></h3>
+<p>我们对寻找与自己有相似品味的影评者很感兴趣，这样我们就可以知道选择影片式采纳谁的建议。下面的代码可以得到影评者之间的相似度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Returns the best matches for person from the prefs dictionary. </span></span><br><span class="line"><span class="comment"># Number of results and similarity function are optional params.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">topMatches</span><span class="params">(prefs,person,n=<span class="number">5</span>,similarity=sim_pearson)</span>:</span></span><br><span class="line">  scores=[(similarity(prefs,person,other),other) </span><br><span class="line">                  <span class="keyword">for</span> other <span class="keyword">in</span> prefs <span class="keyword">if</span> other!=person]</span><br><span class="line">  scores.sort()</span><br><span class="line">  scores.reverse()</span><br><span class="line">  <span class="keyword">return</span> scores[<span class="number">0</span>:n]</span><br></pre></td></tr></table></figure>
+<p>相比较于寻找趣味相投的影评者，我们更想得到的是一份影片的推荐。为此，我们需要做一些归一化的操作，对于我而言，我要得到我和其他影评者之间的相似度，再乘以他们为每部影片给出的评价值。这样的话，一部受更多人评论的电影会有更高的分支，为了修正这一问题，我们再除以相似度之和，如此，就可以预测自己对影片的评价情况。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gets recommendations for a person by using a weighted average</span></span><br><span class="line"><span class="comment"># of every other user's rankings</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRecommendations</span><span class="params">(prefs,person,similarity=sim_pearson)</span>:</span></span><br><span class="line">  totals=&#123;&#125;</span><br><span class="line">  simSums=&#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> other <span class="keyword">in</span> prefs:</span><br><span class="line">    <span class="comment"># don't compare me to myself</span></span><br><span class="line">    <span class="keyword">if</span> other==person: <span class="keyword">continue</span></span><br><span class="line">    sim=similarity(prefs,person,other)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ignore scores of zero or lower</span></span><br><span class="line">    <span class="keyword">if</span> sim&lt;=<span class="number">0</span>: <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> prefs[other]:</span><br><span class="line">	    </span><br><span class="line">      <span class="comment"># only score movies I haven't seen yet</span></span><br><span class="line">      <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> prefs[person] <span class="keyword">or</span> prefs[person][item]==<span class="number">0</span>:</span><br><span class="line">        <span class="comment"># Similarity * Score</span></span><br><span class="line">        totals.setdefault(item,<span class="number">0</span>)</span><br><span class="line">        totals[item]+=prefs[other][item]*sim</span><br><span class="line">        <span class="comment"># Sum of similarities</span></span><br><span class="line">        simSums.setdefault(item,<span class="number">0</span>)</span><br><span class="line">        simSums[item]+=sim</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Create the normalized list</span></span><br><span class="line">  rankings=[(total/simSums[item],item) <span class="keyword">for</span> item,total <span class="keyword">in</span> totals.items()]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Return the sorted list</span></span><br><span class="line">  rankings.sort()</span><br><span class="line">  rankings.reverse()</span><br><span class="line">  <span class="keyword">return</span> rankings</span><br></pre></td></tr></table></figure>
+<p>此处我们发现，选择不同的相似性度量方法，对结果的影响是微乎其微的。（？）</p>
+<h3><span id="匹配商品">匹配商品</span></h3>
+<p>之前我们已经实现了为某人寻找品味相近者，为某人提供影片推荐，现在我们想通过人们的评价来了解影片之间的相似度，这在购物网站中广泛应用。我们可以沿用之前的方法，将人与物对调，再确定相似度即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transformPrefs</span><span class="params">(prefs)</span>:</span></span><br><span class="line">  result=&#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> person <span class="keyword">in</span> prefs:</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person]:</span><br><span class="line">      result.setdefault(item,&#123;&#125;)</span><br><span class="line">      </span><br><span class="line">      <span class="comment"># Flip item and person</span></span><br><span class="line">      result[item][person]=prefs[person][item]</span><br><span class="line">  <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<p>在本例中，如果A和B的相关值为负，则说明喜欢A的人，存在不喜欢B的倾向。</p>
+<h3><span id="基于物品的过滤">基于物品的过滤</span></h3>
+<p>对于一个数据集较大的大型网站而言，将每一个用户和其他所有用户进行比较，然后再对每位用户评过分的商品比较，其速度是无法忍受的。对于商品销售量很大的网站，用户在偏好方面少有重叠，数据会比较稀疏，在这种情况下，基于物品的协作型过滤能得出更好的结论，而且它允许我们将大量人物预先执行，从而更快地基于用户推荐结果。</p>
+<p>总体思路就是为每件物品预先计算好最为相近的其他物品，然后，当我们想为每位用户提供推荐时，可以查看他曾经评过分的物品，并从中选出排位靠前着，再构造出一个加权列表。尽管第一步要求我们检查所有的数据，但是物品间的比较不会像用户间那样频繁变化，我们可以将这样的运算任务安排在网络流量不是很大的时候进行。</p>
+<h4><span id="构造物品比较数据集">构造物品比较数据集</span></h4>
+<p>先利用倒置函数，获得一个有关物品及其评价的列表。然后循环遍历每项物品，求得最为相近的物品及相似度评价值，最后建立并返回一个包含物品及其最相近物品列表的字典。构建完一次数据集之后，我们就可以在需要的时候重复使用它。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculateSimilarItems</span><span class="params">(prefs,n=<span class="number">10</span>)</span>:</span></span><br><span class="line">  <span class="comment"># Create a dictionary of items showing which other items they</span></span><br><span class="line">  <span class="comment"># are most similar to.</span></span><br><span class="line">  result=&#123;&#125;</span><br><span class="line">  <span class="comment"># Invert the preference matrix to be item-centric</span></span><br><span class="line">  itemPrefs=transformPrefs(prefs)</span><br><span class="line">  c=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> item <span class="keyword">in</span> itemPrefs:</span><br><span class="line">    <span class="comment"># Status updates for large datasets</span></span><br><span class="line">    c+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> c%<span class="number">100</span>==<span class="number">0</span>: <span class="keyword">print</span>（<span class="string">"%d / %d"</span> % (c,len(itemPrefs))）</span><br><span class="line">        <span class="comment">#示例代码此处有误，已更正</span></span><br><span class="line">    <span class="comment"># Find the most similar items to this one</span></span><br><span class="line">    scores=topMatches(itemPrefs,item,n=n,similarity=sim_distance)</span><br><span class="line">    result[item]=scores</span><br><span class="line">  <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<p>只有频繁执行该函数，物品的相似度才不会过期。</p>
+<h4><span id="获得推荐">获得推荐</span></h4>
+<p>记得进行归一化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRecommendedItems</span><span class="params">(prefs,itemMatch,user)</span>:</span></span><br><span class="line">  userRatings=prefs[user]</span><br><span class="line">  scores=&#123;&#125;</span><br><span class="line">  totalSim=&#123;&#125;</span><br><span class="line">  <span class="comment"># Loop over items rated by this user</span></span><br><span class="line">  <span class="keyword">for</span> (item,rating) <span class="keyword">in</span> userRatings.items( ):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Loop over items similar to this one</span></span><br><span class="line">    <span class="keyword">for</span> (similarity,item2) <span class="keyword">in</span> itemMatch[item]:</span><br><span class="line"></span><br><span class="line">      <span class="comment"># Ignore if this user has already rated this item</span></span><br><span class="line">      <span class="keyword">if</span> item2 <span class="keyword">in</span> userRatings: <span class="keyword">continue</span></span><br><span class="line">      <span class="comment"># Weighted sum of rating times similarity</span></span><br><span class="line">      scores.setdefault(item2,<span class="number">0</span>)</span><br><span class="line">      scores[item2]+=similarity*rating</span><br><span class="line">      <span class="comment"># Sum of all the similarities</span></span><br><span class="line">      totalSim.setdefault(item2,<span class="number">0</span>)</span><br><span class="line">      totalSim[item2]+=similarity</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Divide each total score by total weighting to get an average</span></span><br><span class="line">  rankings=[(score/totalSim[item],item) <span class="keyword">for</span> item,score <span class="keyword">in</span> scores.items( )]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Return the rankings from highest to lowest</span></span><br><span class="line">  rankings.sort( )</span><br><span class="line">  rankings.reverse( )</span><br><span class="line">  <span class="keyword">return</span> rankings</span><br></pre></td></tr></table></figure>
+<h3><span id="使用movielens真实数据集">使用MovieLens真实数据集</span></h3>
+<p>MovieLens数据集是一个涉及电影评价的真是数据集，由明尼苏达州立大学GroupLens项目组开发，下载链接为 <a href="https://grouplens.org/datasets/movielens/" target="_blank" rel="noopener">https://grouplens.org/datasets/movielens/</a>我选取的是迷你版的数据集，几个文件分别包括了影片名、影片标签、用户打分、影片链接，最后一次更新时间为2018年6月。</p>
+<h4><span id="加载文件">加载文件</span></h4>
+<p>CSV是英文Comma Separate Values（逗号分隔值）的缩写，顾名思义，文档的内容是由 “,” 分隔的一列列的数据构成的。CSV文档是一种编辑方便，可视化效果极佳的数据存储方式。Python中有着非常强大的库可以处理这种文档。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadMovieLens</span><span class="params">(path=<span class="string">'/data/ml-latest-small'</span>)</span>:</span></span><br><span class="line">  <span class="keyword">import</span> csv</span><br><span class="line">  <span class="keyword">import</span> codecs</span><br><span class="line">  <span class="comment"># Get movie titles</span></span><br><span class="line">  movies=&#123;&#125;</span><br><span class="line">  csvFile = open(<span class="string">"movies.csv"</span>, <span class="string">"rb"</span>)</span><br><span class="line">  reader1 = csv.reader(codecs.iterdecode(csvFile, <span class="string">'utf-8'</span>))  </span><br><span class="line">  <span class="keyword">for</span> item <span class="keyword">in</span> reader1:</span><br><span class="line">    <span class="keyword">if</span> reader1.line_num == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">continue</span>    </span><br><span class="line">    id = item[<span class="number">0</span>]</span><br><span class="line">    title = item[<span class="number">1</span>]</span><br><span class="line">    movies[id]=title</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Load data</span></span><br><span class="line">  prefs=&#123;&#125;</span><br><span class="line">  csvFile2 = open(<span class="string">"ratings.csv"</span>, <span class="string">"rb"</span>)</span><br><span class="line">  reader2 = csv.reader(codecs.iterdecode(csvFile2, <span class="string">'utf-8'</span>))</span><br><span class="line">  <span class="keyword">for</span> item <span class="keyword">in</span> reader2:</span><br><span class="line">    <span class="keyword">if</span> reader2.line_num == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">continue</span>    </span><br><span class="line">    (user,movieid,rating,ts)=item</span><br><span class="line">    prefs.setdefault(user,&#123;&#125;)</span><br><span class="line">    prefs[user][movies[movieid]]=float(rating)</span><br><span class="line">  <span class="keyword">return</span> prefs</span><br></pre></td></tr></table></figure>
+<h4><span id="运行并获得推荐">运行并获得推荐</span></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">reload(recommendations)</span><br><span class="line">prefs=recommendations.loadMovieLens()</span><br><span class="line"></span><br><span class="line"><span class="comment">#基于用户的推荐</span></span><br><span class="line">recommendations.getRecommendations(prefs,<span class="string">'87'</span>) [<span class="number">0</span>:<span class="number">30</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#基于物品的推荐 构建相似度字典与获得推荐</span></span><br><span class="line">itemsim=recommendations.calculateSimilarItems(prefs,n=<span class="number">50</span>)</span><br><span class="line">recommendations.getRecommendedItems(prefs,itemsim,<span class="string">'87'</span>)[<span class="number">0</span>:<span class="number">30</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(<span class="number">5.0</span>, <span class="string">'Zeitgeist: Moving Forward (2011)'</span>), (<span class="number">5.0</span>, <span class="string">'Wow! A Talking Fish! (1983)'</span>), (<span class="number">5.0</span>, <span class="string">'Wonder Woman (2009)'</span>), (<span class="number">5.0</span>, <span class="string">'Woman Under the Influence, A (1974)'</span>), (<span class="number">5.0</span>, <span class="string">'Woman Is a Woman, A (femme est une femme, Une) (1961)'</span>), (<span class="number">5.0</span>, <span class="string">'Winter in Prostokvashino (1984)'</span>), (<span class="number">5.0</span>, <span class="string">'Winnie the Pooh and the Day of Concern (1972)'</span>), (<span class="number">5.0</span>, <span class="string">'Winnie the Pooh Goes Visiting (1971)'</span>), (<span class="number">5.0</span>, <span class="string">'Winnie Pooh (1969)'</span>), (<span class="number">5.0</span>, <span class="string">'Wings, Legs and Tails (1986)'</span>), (<span class="number">5.0</span>, <span class="string">'When Worlds Collide (1951)'</span>), (<span class="number">5.0</span>, <span class="string">'What Men Talk About (2010)'</span>), (<span class="number">5.0</span>, <span class="string">'Watermark (2014)'</span>), (<span class="number">5.0</span>, <span class="string">'War for the Planet of the Apes (2017)'</span>), (<span class="number">5.0</span>, <span class="string">'Vovka in the Kingdom of Far Far Away (1965)'</span>), (<span class="number">5.0</span>, <span class="string">'Very Potter Sequel, A (2010)'</span>), (<span class="number">5.0</span>, <span class="string">'Vampire in Venice (Nosferatu a Venezia) (Nosferatu in Venice) (1986)'</span>), (<span class="number">5.0</span>, <span class="string">'Vagabond (Sans toit ni loi) (1985)'</span>), (<span class="number">5.0</span>, <span class="string">'Vacations in Prostokvashino (1980)'</span>), (<span class="number">5.0</span>, <span class="string">'Unfaithfully Yours (1948)'</span>), (<span class="number">5.0</span>, <span class="string">"Tyler Perry's I Can Do Bad All by Myself (2009)"</span>), (<span class="number">5.0</span>, <span class="string">'Two Family House (2000)'</span>), (<span class="number">5.0</span>, <span class="string">'True Stories (1986)'</span>), (<span class="number">5.0</span>, <span class="string">'Troll 2 (1990)'</span>), (<span class="number">5.0</span>, <span class="string">'Travels of an Ant (1983)'</span>), (<span class="number">5.0</span>, <span class="string">'Trailer Park Boys (1999)'</span>), (<span class="number">5.0</span>, <span class="string">'Tokyo Tribe (2014)'</span>), (<span class="number">5.0</span>, <span class="string">'Three from Prostokvashino (1978)'</span>), (<span class="number">5.0</span>, <span class="string">'Thousand Clowns, A (1965)'</span>), (<span class="number">5.0</span>, <span class="string">'There Once Was a Dog (1982)'</span>)]</span><br></pre></td></tr></table></figure>
+<h2><span id="to-be-continued">To be continued</span></h2>
+<p>第二章的内容周三花了半个上午看完，然而实践起来却花了周日大半天。在实践的过程中遇到很多坑这些都是仅靠看书想想不到的困难：</p>
+<ul>
+<li>reload重载文件</li>
+<li>print的各种用法</li>
+<li>csv文件的读取</li>
+</ul>
+<p>还有很多事情可以做：</p>
+<ul>
+<li>用MovieLens数据集探究不同评价方法对结果的影响程度</li>
+<li>利用API构造数据集，尤其是中文网站的数据集，为身边的人做一个推荐系统</li>
+<li>对MovieLens中的影片实现聚类（与第三章相关但方法不同）</li>
+</ul>
+<p>之前在各种论坛上看到很多人说这本书第二章的代码不能用，以及书中的网站域名已经更改，相比较于改一改用一用示例代码，我更倾向于按照书中讲述的思路自己写一份符合自己需求的代码。</p>
+<p>本书后面的章节更加吸引我，请期待我的后续整理。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/08/28/No-2-Discovering-Groups/" data-toggle="tooltip" data-placement="top" title="No.2 聚类-发现群组 Discovering Groups">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/08/22/久违的夏天/" data-toggle="tooltip" data-placement="top" title="久违的夏天">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Programming Collective Intelligence No.1 推荐系统</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">提供推荐的系统</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">概述</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">搜集偏好</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">寻找相近的用户——相似度评价值</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.1.</span> <span class="toc-nav-text">欧几里得距离</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.2.</span> <span class="toc-nav-text">皮尔逊相关度</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.3.</span> <span class="toc-nav-text">其他相似性度量法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.3.1.</span> <span class="toc-nav-text">Jaccard系数</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.3.2.</span> <span class="toc-nav-text">曼哈顿距离算法</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.3.3.</span> <span class="toc-nav-text">参考与补充</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">提供推荐</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">匹配商品</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.6.</span> <span class="toc-nav-text">基于物品的过滤</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.6.1.</span> <span class="toc-nav-text">构造物品比较数据集</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.6.2.</span> <span class="toc-nav-text">获得推荐</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.7.</span> <span class="toc-nav-text">使用MovieLens真实数据集</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.7.1.</span> <span class="toc-nav-text">加载文件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.7.2.</span> <span class="toc-nav-text">运行并获得推荐</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">To be continued</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#cs" title="cs">cs</a>
+                        
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                          <a class="tag" href="/tags/#ML" title="ML">ML</a>
+                        
+                          <a class="tag" href="/tags/#集体智慧编程" title="集体智慧编程">集体智慧编程</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://fenghe.us" target="_blank">Fenghe</a></li>
+                    
+                        <li><a href="http://www.c01dkit.com/" target="_blank">柷敔</a></li>
+                    
+                        <li><a href="http://dingzhi.ga/" target="_blank">DingZhi</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kamzero";
+    var disqus_identifier = "https://kamzero.cn/2019/08/25/No-1-Making-Recommendations/";
+    var disqus_url = "https://kamzero.cn/2019/08/25/No-1-Making-Recommendations/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/kamliezero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/kamzero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; kamzero 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://kamzero.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-144253754-1';
+    var _gaDomain = 'undefined';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '8e768ea7fd18877f581950076f9ac0cb';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://kamzero.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
