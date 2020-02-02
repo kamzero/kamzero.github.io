@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          No.3 基于Python的数据可视化 Data Visualization - kamzero
+        
+    </title>
+
+    <link rel="canonical" href="https://kamzero.cn/2020/02/01/基于Python的数据可视化/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('1.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#cs" title="cs">cs</a>
+                            
+                              <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                            
+                              <a class="tag" href="/tags/#可视化" title="可视化">可视化</a>
+                            
+                        </div>
+                        <h1>No.3 基于Python的数据可视化 Data Visualization</h1>
+                        <h2 class="subheading"> Python Crash Course Chap.15  </h2>
+                        <span class="meta">
+                            Posted by kamzero on
+                            2020-02-01
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">kamzero&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="no3-基于python的数据可视化-data-visualization">No.3 基于Python的数据可视化 Data Visualization</span></h1>
+<h2><span id="前言">前言</span></h2>
+<p>​	好久不见，小半年之后，我又重新开始了博客之旅，关于近期的经历与反思，我会另外成文。今天，让我们来利用Python是实现一点简单的数据可视化。</p>
+<p>​	数据可视化是指通过可视化表示来探索数据，它与数据挖掘紧密相关，而数据挖掘是指使用代码来探索数据集的规律和关联。漂亮地呈现数据关乎的并非仅仅是漂亮的图片，以引人注目的间接方式呈现数据，让观看者明白其意义，发现数据集中原本未意识到的规律和意义。当然，绘图的效果非常重要，可视化一度取代GIS成为了推动计算机图形学发展的重要因素。</p>
+<p>​	眼下最流行的工具之一是matplotlib，是一个数学绘图库；我们还将使用Pygal包，它专注于生成适合在数字设备上显示的图表，通过它我们可以在用户与图表交互时突出元素以及调整大小，还可以调整整个图表的尺寸使其适应不同屏幕。</p>
+<p>​	装好两个库，我们就可以开始可视化之旅啦。</p>
+<h4><span id="附matplotlib画廊">附：matplotlib画廊</span></h4>
+<p><a href="http://matplotlib.org" target="_blank" rel="noopener">http://matplotlib.org</a> 点击画廊中的图表可以查看用于生成图表的代码。</p>
+<h3><span id="计划实现些什么">计划实现些什么？</span></h3>
+<ul>
+<li>实现
+<ul>
+<li>生成数据
+<ul>
+<li>绘制简单的折线图</li>
+<li>绘制随机漫步散点图</li>
+<li>用Pygal模拟掷骰子绘制直方图</li>
+</ul>
+</li>
+<li>下载数据的可视化
+<ul>
+<li>CSV数据</li>
+</ul>
+</li>
+<li>使用Web API
+<ul>
+<li>Git &amp; Github
+<ul>
+<li>概述最受欢迎的仓库</li>
+<li>使用Pygal可视化仓库</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="生成数据">生成数据</span></h2>
+<h4><span id="plot-绘制简单的折线图">plot() 绘制简单的折线图</span></h4>
+<p>利用plot()，实在过于简单，仅附上代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动生成数据</span></span><br><span class="line">input_values = list(range(<span class="number">1</span>,<span class="number">1001</span>))</span><br><span class="line">squares = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> input_values]</span><br><span class="line"></span><br><span class="line">plt.plot(input_values,squares,linewidth = <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置图表标题与坐标轴</span></span><br><span class="line">plt.title(<span class="string">"Square Numbers"</span>,fontsize = <span class="number">24</span>)</span><br><span class="line">plt.xlabel(<span class="string">"Value"</span>,fontsize = <span class="number">14</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Square of Value"</span>,fontsize = <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置刻度标记的大小</span></span><br><span class="line">plt.tick_params(axis = <span class="string">'both'</span>,labelsize = <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h4><span id="scatter-绘制散点图">scatter() 绘制散点图</span></h4>
+<p><img src="squares_plot.png" alt="squares_plot"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># input_values = [1,2,3,4,5]</span></span><br><span class="line"><span class="comment"># squares = [1,4,9,16,25]</span></span><br><span class="line">input_values = list(range(<span class="number">1</span>,<span class="number">1001</span>,<span class="number">100</span>))</span><br><span class="line">squares = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> input_values]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单个点 参数 x,y坐标, s=尺寸</span></span><br><span class="line"><span class="comment"># edgecolor = 'none'  去除散点的轮廓</span></span><br><span class="line"><span class="comment"># c = 'red'  c = (0,0,0.8)  修改颜色</span></span><br><span class="line"><span class="comment"># cmap = plt.cm.Blues  内置颜色映射</span></span><br><span class="line">plt.scatter(input_values, squares, cmap = plt.cm.Blues, edgecolor = <span class="string">'none'</span>, s=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置图表标题与坐标轴</span></span><br><span class="line">plt.title(<span class="string">"Square Numbers"</span>,fontsize = <span class="number">24</span>)</span><br><span class="line">plt.xlabel(<span class="string">"Value"</span>,fontsize = <span class="number">14</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Square of Value"</span>,fontsize = <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置刻度标记的大小</span></span><br><span class="line">plt.tick_params(axis = <span class="string">'both'</span>,labelsize = <span class="number">14</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置每个坐标轴的取值范围</span></span><br><span class="line">plt.axis([<span class="number">0</span>,<span class="number">1100</span>,<span class="number">0</span>,<span class="number">1100000</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.show()</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 自动保存图表 </span></span><br><span class="line"><span class="comment"># bbox_inches = 'tight' 裁掉图表周围空白区域</span></span><br><span class="line">plt.savefig(<span class="string">'squares_plot.png'</span>,bbox_inches = <span class="string">'tight'</span>)</span><br></pre></td></tr></table></figure>
+<h3><span id="绘制随机漫步散点图">绘制随机漫步散点图</span></h3>
+<p>​	随机漫步是这样行走得到的路径：每一次行走是完全随机的，没有明确的方向，结果是由一系列随机决策决定的。在自然界、物理学、生物学、化学和经济领域，随机漫步都有其实际用途。</p>
+<h4><span id="创建-randomwalk-类">创建 RandomWalk() 类</span></h4>
+<p>​	该类随机地选择前进方向，需要三个属性：其中一个是存储随机漫步次数的变量，其他两个是列表，分别存储随机漫步经过的每个点的x和y坐标。</p>
+<p>​	在方法fill_walk() 中使用choice() 模拟随机选择方向和步长，特判原地踏步的情况，将x_step与x_values中的最后一个值self.x_values[-1]相加，获得下一个点的x坐标，并将其附在x_values的末尾。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> choice</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomWalk</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">""" 生成随机漫步数据的类 """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_points = <span class="number">5000</span>)</span>:</span> </span><br><span class="line">        <span class="comment"># 初始化随机漫步的属性</span></span><br><span class="line">        self.num_points = num_points</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 所有随机漫步始于(0,0)</span></span><br><span class="line">        self.x_values = [<span class="number">0</span>]</span><br><span class="line">        self.x_values = [<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fill_walk</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""计算随机漫步包含的所有点"""</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 漫步</span></span><br><span class="line">        <span class="keyword">while</span> len(self.x_values) &lt; self.num_points:</span><br><span class="line">            <span class="comment"># 随机生成方向和前进距离</span></span><br><span class="line">            x_direction = choice([<span class="number">1</span>,<span class="number">-1</span>])</span><br><span class="line">            x_distance = choice([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">            x_step = x_direction * x_distance</span><br><span class="line"></span><br><span class="line">            y_direction = choice([<span class="number">1</span>,<span class="number">-1</span>])</span><br><span class="line">            y_distance = choice([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">            y_step = y_direction * y_distance</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 不原地踏步</span></span><br><span class="line">            <span class="keyword">if</span> x_step == <span class="number">0</span> <span class="keyword">and</span> y_step == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 计算下一个点的x和y</span></span><br><span class="line">            next_x = self.x_values[<span class="number">-1</span>] + x_step</span><br><span class="line">            next_y = self.y_values[<span class="number">-1</span>] + y_step</span><br><span class="line"></span><br><span class="line">            self.x_values.append(next_x)</span><br><span class="line">            self.y_values.append(next_y)</span><br></pre></td></tr></table></figure>
+<h4><span id="绘制随机漫步图">绘制随机漫步图</span></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> randow_walk <span class="keyword">import</span> RandomWalk</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个RandomWalk实例，绘制其包含的点</span></span><br><span class="line">rw = RandomWalk()</span><br><span class="line">rw.fill_walk()</span><br><span class="line">plt.scatter(rw.x_values,rw.y_values, s=<span class="number">15</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h4><span id="模拟多次随机漫步">模拟多次随机漫步</span></h4>
+<p>​	将上述代码放在while循环中，在不多次运行程序的情况下模拟多次随机漫步，每次各不相同。每次关闭查看器后选择是否再次模拟。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> randow_walk <span class="keyword">import</span> RandomWalk</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个RandomWalk实例，绘制其包含的点</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    rw = RandomWalk()</span><br><span class="line">    rw.fill_walk()</span><br><span class="line">    plt.scatter(rw.x_values,rw.y_values, s=<span class="number">15</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">    keep_running = input(<span class="string">"Make another walk? y/n:"</span>)</span><br><span class="line">    <span class="keyword">if</span> keep_running == <span class="string">'n'</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h4><span id="样式及尺寸">样式及尺寸</span></h4>
+<p>​	使用range生成一个数字列表，将参数c设为point_numbers，指定颜色映射Blues，随机漫步图从浅蓝渐变为深蓝。</p>
+<p><img src="1.3.png" alt="1.3"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>​	重绘起点和终点，以突出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>​	隐藏坐标轴。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>​	调整matplotlib输出的尺寸以适应屏幕大小，在绘图前调用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="1.4.png" alt="1.4"></p>
+<p><img src="1.5.png" alt="1.5"></p>
+<p>​	最终，我们调整点的大小为2，绘制出了较为好看的图片。</p>
+<h3><span id="用pygal模拟掷骰子绘制直方图">用Pygal模拟掷骰子绘制直方图</span></h3>
+<h4><span id="用随机数模拟骰子">用随机数模拟骰子</span></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Die</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""A class representing a single die."""</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_sides=<span class="number">6</span>)</span>:</span></span><br><span class="line">        <span class="string">"""Assume a six-sided die."""</span></span><br><span class="line">        self.num_sides = num_sides</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">roll</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">""""Return a random value between 1 and number of sides."""</span></span><br><span class="line">        <span class="keyword">return</span> randint(<span class="number">1</span>, self.num_sides)</span><br></pre></td></tr></table></figure>
+<h4><span id="分析结果并绘制直方图">分析结果并绘制直方图</span></h4>
+<p><img src="dice_visual.png" alt="dice_visual"></p>
+<p>调用pygal库绘制直方图，展现同时扔两个骰子点数和的结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> die <span class="keyword">import</span> Die</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pygal</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a D6 and a D10.</span></span><br><span class="line">die_1 = Die()</span><br><span class="line">die_2 = Die(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make some rolls, and store results in a list.</span></span><br><span class="line">results = []</span><br><span class="line"><span class="keyword">for</span> roll_num <span class="keyword">in</span> range(<span class="number">50000</span>):</span><br><span class="line">    result = die_1.roll() + die_2.roll()</span><br><span class="line">    results.append(result)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># Analyze the results.</span></span><br><span class="line">frequencies = []</span><br><span class="line">max_result = die_1.num_sides + die_2.num_sides</span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> range(<span class="number">2</span>, max_result+<span class="number">1</span>):</span><br><span class="line">    frequency = results.count(value)</span><br><span class="line">    frequencies.append(frequency)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># Visualize the results.</span></span><br><span class="line">hist = pygal.Bar()</span><br><span class="line"></span><br><span class="line">hist.title = <span class="string">"Results of rolling a D6 and a D10 50,000 times."</span></span><br><span class="line">hist.x_labels = [<span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">'10'</span>, <span class="string">'11'</span>, <span class="string">'12'</span>,</span><br><span class="line">    <span class="string">'13'</span>, <span class="string">'14'</span>, <span class="string">'15'</span>, <span class="string">'16'</span>]</span><br><span class="line">hist.x_title = <span class="string">"Result"</span></span><br><span class="line">hist.y_title = <span class="string">"Frequency of Result"</span></span><br><span class="line"></span><br><span class="line">hist.add(<span class="string">'D10 + D10'</span>, frequencies)</span><br><span class="line">hist.render_to_file(<span class="string">'dice_visual.png'</span>)</span><br></pre></td></tr></table></figure>
+<h2><span id="下载数据">下载数据</span></h2>
+<p>​	前文主要是根据少量数据或生成数据来作图，而实际应用时常常需要操作大量数据。二者的区别在于，前者可以写入程序中，后者则往往涉及文件、API的读取与使用。</p>
+<h3><span id="csv数据">CSV数据</span></h3>
+<p>​	CSV是以逗号分隔的值的意思，这样的数据最易处理。接下来，我们将用样例代码和锡特卡的天气数据来熟悉一下csv文件的处理。</p>
+<h4><span id="分析文件头并读取数据">分析文件头并读取数据</span></h4>
+<p>​	next()方法返回文件的下一行；strptime将字符串转为datetime对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get dates, high, and low temperatures from file.</span></span><br><span class="line">filename = <span class="string">'death_valley_2014.csv'</span></span><br><span class="line"><span class="keyword">with</span> open(filename) <span class="keyword">as</span> f:</span><br><span class="line">    reader = csv.reader(f)</span><br><span class="line">    header_row = next(reader)</span><br><span class="line"></span><br><span class="line">    dates, highs, lows = [], [], []</span><br><span class="line">    <span class="comment"># 逐行读取并处理</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> reader:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            current_date = datetime.strptime(row[<span class="number">0</span>], <span class="string">"%Y-%m-%d"</span>)</span><br><span class="line">            high = int(row[<span class="number">1</span>])</span><br><span class="line">            low = int(row[<span class="number">3</span>])</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            print(current_date, <span class="string">'missing data'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dates.append(current_date)</span><br><span class="line">            highs.append(high)</span><br><span class="line">            lows.append(low)</span><br></pre></td></tr></table></figure>
+<h4><span id="绘制气温图表">绘制气温图表</span></h4>
+<ul>
+<li>fig.autofmt_xdate()绘制斜的标签以免重叠；</li>
+<li>fill_between(dates, highs, lows, facecolor=‘blue’, alpha=0.1)用于给两条线之间的绘图区着色；</li>
+<li>try-except-else结构处理特殊数据</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Plot data.</span></span><br><span class="line">fig = plt.figure(dpi=<span class="number">128</span>, figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">plt.plot(dates, highs, c=<span class="string">'red'</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.plot(dates, lows, c=<span class="string">'blue'</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.fill_between(dates, highs, lows, facecolor=<span class="string">'blue'</span>, alpha=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Format plot.</span></span><br><span class="line">title = <span class="string">"Daily high and low temperatures - 2014\nDeath Valley, CA"</span></span><br><span class="line">plt.title(title, fontsize=<span class="number">20</span>)</span><br><span class="line">plt.xlabel(<span class="string">''</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">fig.autofmt_xdate()</span><br><span class="line">plt.ylabel(<span class="string">"Temperature (F)"</span>, fontsize=<span class="number">16</span>)</span><br><span class="line">plt.tick_params(axis=<span class="string">'both'</span>, which=<span class="string">'major'</span>, labelsize=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="2.1.png" alt="2.1"></p>
+<h3><span id="json数据">json数据</span></h3>
+<ul>
+<li>数据来源
+<ul>
+<li>Open Knowledge International <a href="https://okfn.org" target="_blank" rel="noopener">https://okfn.org</a></li>
+<li>许多国际组织在免费分享有趣的json数据</li>
+</ul>
+</li>
+<li>然而免费的json来源常常有诸多限制，尚没有找到让人想要处理的数据，留白。</li>
+</ul>
+<h2><span id="使用api">使用API</span></h2>
+<p>​	Web API是网站的一部分，用于与使用非常具体的URL请求特定信息的程序交互。这种请求称为API调用。请求的数据将以易于处理的格式返回。依赖于外部数据源的大多数应用程序都依赖于API调用。</p>
+<ul>
+<li>常用API整理 <a href="https://sharecuts.cn/post/31" target="_blank" rel="noopener">https://sharecuts.cn/post/31</a></li>
+</ul>
+<h3><span id="git-amp-github">Git &amp; Github</span></h3>
+<h4><span id="api调用">API调用</span></h4>
+<ul>
+<li><a href="https://api.github.com/search/repositories?q=language:python&amp;sort=stars" target="_blank" rel="noopener">https://api.github.com/search/repositories?q=language:python&amp;sort=stars</a></li>
+<li><a href="https://api.github.com/" target="_blank" rel="noopener">https://api.github.com/</a>
+<ul>
+<li>将请求发到GitHub网站中响应API调用</li>
+</ul>
+</li>
+<li>search/repositories
+<ul>
+<li>让API搜索GitHub上所有仓库</li>
+</ul>
+</li>
+<li>?
+<ul>
+<li>指出后面要传递实参</li>
+</ul>
+</li>
+<li>q=
+<ul>
+<li>指定查询</li>
+</ul>
+</li>
+<li>language:python&amp;sort=stars
+<ul>
+<li>筛选使用python语言的</li>
+<li>按照stars进行排序</li>
+</ul>
+</li>
+</ul>
+<p>响应的前几行如下：可以看到，当前GitHub上有4765912个Python项目；“incomplete_results”: false,倘若请求不成功，这个返回值为true。</p>
+<blockquote>
+<p>{<br>
+“total_count”: 4765912,<br>
+“incomplete_results”: false,<br>
+“items”: [<br>
+​    {<br>
+​      “id”: 83222441,<br>
+​      “node_id”: “MDEwOlJlcG9zaXRvcnk4MzIyMjQ0MQ==”,<br>
+​      “name”: “system-design-primer”,<br>
+​      “full_name”: “donnemartin/system-design-primer”,<br>
+​      “private”: false,<br>
+​      “owner”: {</p>
+</blockquote>
+<h4><span id="处理api响应">处理API响应</span></h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> pygal</span><br><span class="line"><span class="keyword">from</span> pygal.style <span class="keyword">import</span> LightColorizedStyle <span class="keyword">as</span> LCS, LightenStyle <span class="keyword">as</span> LS</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make an API call, and store the response.</span></span><br><span class="line">url = <span class="string">'https://api.github.com/search/repositories?q=language:python&amp;sort=stars'</span></span><br><span class="line">r = requests.get(url)</span><br><span class="line">print(<span class="string">"Status code:"</span>, r.status_code)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Store API response in a variable.</span></span><br><span class="line">response_dict = r.json()</span><br><span class="line">print(<span class="string">"Total repositories:"</span>, response_dict[<span class="string">'total_count'</span>])</span><br></pre></td></tr></table></figure>
+<p>​	流程如下：导入requests模块，存储API调用的URL，使用requests模块的get方法来执行调用，状态码status_code为200表示请求成功；随后，我们将API响应存储在一个变量中。响应字典包含三个键：‘items’, ‘total_count’, ‘incomplete_results’.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Explore information about the repositories.</span></span><br><span class="line">repo_dicts = response_dict[<span class="string">'items'</span>]</span><br><span class="line"></span><br><span class="line">names, plot_dicts = [], []</span><br><span class="line"><span class="keyword">for</span> repo_dict <span class="keyword">in</span> repo_dicts:</span><br><span class="line">    names.append(repo_dict[<span class="string">'name'</span>])</span><br><span class="line">    </span><br><span class="line">    plot_dict = &#123;</span><br><span class="line">        <span class="string">'value'</span>: repo_dict[<span class="string">'stargazers_count'</span>],</span><br><span class="line">        <span class="string">'label'</span>: repo_dict[<span class="string">'description'</span>],</span><br><span class="line">        <span class="string">'xlink'</span>: repo_dict[<span class="string">'html_url'</span>],</span><br><span class="line">        &#125;</span><br><span class="line">    plot_dicts.append(plot_dict)</span><br></pre></td></tr></table></figure>
+<p>​	与’items’相关联的值是一个列表，其中包含很多字典，每一个字典都包含关于一个Python仓库的信息。我们将字典列表存在repo_dicts中，提取一个字典打印后发现共有68个键，遍历字典列表提取出感兴趣的信息存入新字典。</p>
+<h4><span id="监视api的速率限制">监视API的速率限制</span></h4>
+<p>​	大多数API都存在速率限制，即在特定时间内可执行的请求数存在限制。获悉限制，在<a href="https://api.github.com/rate_limit" target="_blank" rel="noopener">https://api.github.com/rate_limit</a>查看。</p>
+<h4><span id="使用pygal可视化仓库">使用Pygal可视化仓库</span></h4>
+<p><img src="python_repos.svg" alt="python_repos"></p>
+<p>​	创建交互式的条形图，单击条形可以进入项目主页。可视化部分代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Make visualization.</span></span><br><span class="line">my_style = LS(<span class="string">'#333366'</span>, base_style=LCS)</span><br><span class="line"></span><br><span class="line">my_config = pygal.Config()</span><br><span class="line">my_config.x_label_rotation = <span class="number">45</span></span><br><span class="line">my_config.show_legend = <span class="literal">False</span></span><br><span class="line">my_config.title_font_size = <span class="number">24</span></span><br><span class="line">my_config.label_font_size = <span class="number">14</span></span><br><span class="line">my_config.major_label_font_size = <span class="number">18</span></span><br><span class="line">my_config.truncate_label = <span class="number">15</span></span><br><span class="line">my_config.show_y_guides = <span class="literal">False</span></span><br><span class="line">my_config.width = <span class="number">1000</span></span><br><span class="line"></span><br><span class="line">chart = pygal.Bar(my_config, style=my_style)</span><br><span class="line">chart.title = <span class="string">'Most-Starred Python Projects on GitHub'</span></span><br><span class="line">chart.x_labels = names</span><br><span class="line"></span><br><span class="line">chart.add(<span class="string">''</span>, plot_dicts)</span><br><span class="line">chart.render_to_file(<span class="string">'python_repos.svg'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="3.1.png" alt="3.1"></p>
+<h2><span id="后记">后记</span></h2>
+<h4><span id="附录那些不经意间学到的事">附录：那些不经意间学到的事</span></h4>
+<ul>
+<li>pip安装pygal 出现“Read time out，port 443”
+<ul>
+<li><em>443</em>端口即网页浏览端口，主要是用于HTTPS服务，是提供加密和通过安全端口传输的另一种HTTP</li>
+<li>目前怀疑科学上网质量不高，导致time out</li>
+<li>解决方案：多试了几次，在进度条不动时按了ctrl+z???</li>
+</ul>
+</li>
+<li>计网涉及方方面面。</li>
+</ul>
+<h4><span id="可以做的有趣的事">可以做的有趣的事</span></h4>
+<ul>
+<li>去找有趣的json数据集进行分析和可视化，这些工具实在是太好用了。</li>
+</ul>
+<h3><span id="写在后面">写在后面</span></h3>
+<p>​	今年回家比较仓促，没带什么书，假期又比预想中长些，对着电子屏幕难免有些抓狂。所幸之前给爸爸买的《Python编程：从入门到实践》还有可取之处，这才找回了看书写代码的感觉。整整五个月没有认真写过博客了，跟队友讨论问题后点开了自己夏天写的博客，还能记起当时的激情与欢欣。这些日子有过专注与投入，但更多的是自我的迷失和作息的崩溃，直到今天重新借助博客整理所学并且因过于投入而错过了主队的比赛，才算是看到回归life in control状态的希望。写完这篇文章，我才真真切切地觉得新的一年开始了，我或许需要一份总结和一个展望。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/10/17/Enjoy-the-Coding-and-Thinking/" data-toggle="tooltip" data-placement="top" title="Enjoy the Coding and Thinking">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">No.3 基于Python的数据可视化 Data Visualization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">前言</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.0.1.</span> <span class="toc-nav-text">附：matplotlib画廊</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">计划实现些什么？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">生成数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.0.1.</span> <span class="toc-nav-text">plot() 绘制简单的折线图</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.0.2.</span> <span class="toc-nav-text">scatter() 绘制散点图</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">绘制随机漫步散点图</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.1.</span> <span class="toc-nav-text">创建 RandomWalk() 类</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.2.</span> <span class="toc-nav-text">绘制随机漫步图</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.</span> <span class="toc-nav-text">模拟多次随机漫步</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.4.</span> <span class="toc-nav-text">样式及尺寸</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">用Pygal模拟掷骰子绘制直方图</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.1.</span> <span class="toc-nav-text">用随机数模拟骰子</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.2.</span> <span class="toc-nav-text">分析结果并绘制直方图</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">下载数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">CSV数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.1.</span> <span class="toc-nav-text">分析文件头并读取数据</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.2.</span> <span class="toc-nav-text">绘制气温图表</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">json数据</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">使用API</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">Git &amp; Github</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.1.1.</span> <span class="toc-nav-text">API调用</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.1.2.</span> <span class="toc-nav-text">处理API响应</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.1.3.</span> <span class="toc-nav-text">监视API的速率限制</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.1.4.</span> <span class="toc-nav-text">使用Pygal可视化仓库</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">后记</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.0.1.</span> <span class="toc-nav-text">附录：那些不经意间学到的事</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.0.2.</span> <span class="toc-nav-text">可以做的有趣的事</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">写在后面</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#cs" title="cs">cs</a>
+                        
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                          <a class="tag" href="/tags/#可视化" title="可视化">可视化</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://zhangxy.tech" target="_blank">蛮鱼</a></li>
+                    
+                        <li><a href="http://fenghe.us" target="_blank">Fenghe</a></li>
+                    
+                        <li><a href="http://www.c01dkit.com/" target="_blank">柷敔</a></li>
+                    
+                        <li><a href="http://dingzhi.ga/" target="_blank">DingZhi</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kamzero";
+    var disqus_identifier = "https://kamzero.cn/2020/02/01/基于Python的数据可视化/";
+    var disqus_url = "https://kamzero.cn/2020/02/01/基于Python的数据可视化/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/kamliezero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/kamzero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; kamzero 2020 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://kamzero.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-144253754-1';
+    var _gaDomain = 'undefined';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '8e768ea7fd18877f581950076f9ac0cb';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://kamzero.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
