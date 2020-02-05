@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Leetcode Day1 DP - kamzero
+        
+    </title>
+
+    <link rel="canonical" href="https://kamzero.cn/2020/02/05/leetcode-day-1-dp/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('1.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#cs" title="cs">cs</a>
+                            
+                              <a class="tag" href="/tags/#leetcode" title="leetcode">leetcode</a>
+                            
+                        </div>
+                        <h1>Leetcode Day1 DP</h1>
+                        <h2 class="subheading"> Easy &amp; Medium  </h2>
+                        <span class="meta">
+                            Posted by kamzero on
+                            2020-02-05
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">kamzero&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="leetcode-day-1-动态规划">Leetcode Day 1 - 动态规划</span></h1>
+<h3><span id="写在前面">写在前面</span></h3>
+<p>留了两周时间刷leetcode，希望至少按tag刷100T+，中间2.14-2.18会奉献给美赛，所以时间还挺紧张的，只剩个10天，抓紧吧。这是最好的机会了，请务必珍惜。</p>
+<h2><span id="easy">Easy</span></h2>
+<h3><span id="53最大连续子序和">53.最大连续子序和</span></h3>
+<h4><span id="题目要求">题目要求</span></h4>
+<p>如题</p>
+<h4><span id="解题思路">解题思路</span></h4>
+<p>动态规划</p>
+<h4><span id="代码">代码</span></h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize)</span></span>&#123;</span><br><span class="line">    <span class="comment">// initialize</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> dp[numsSize]; <span class="comment">// numsSize - 1</span></span><br><span class="line">    <span class="keyword">int</span> ans;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// initial state 根据实际情况</span></span><br><span class="line">    dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    ans = dp[<span class="number">0</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// state change </span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; numsSize ; i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i] = dp[i<span class="number">-1</span>]+nums[i]&gt;nums[i]? dp[i<span class="number">-1</span>]+nums[i]:nums[i];</span><br><span class="line">        ans = dp[i]&gt;ans?dp[i]:ans;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// answer</span></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="121-买卖股票的最佳时机">121. 买卖股票的最佳时机</span></h3>
+<h4><span id="题目要求">题目要求</span></h4>
+<p>只能买入卖出最多一次</p>
+<h4><span id="解题思路">解题思路</span></h4>
+<p>思想来自牛顿-莱布尼兹公式，区间和可以转换成求差的问题，求差问题，也可以转换成区间和的问题。其中，“原函数”数组表示的是前缀和。</p>
+<p>​	这是一个最大连续子数组和的问题，用动态规划来解，，dp[i]表示以 i 为结尾的最大连续子数组和，递推公式为：dp[i] = max(0, dp[i-1]).</p>
+<p>​	当然，并不是对原始股价进行动态规划，而是对求区间和的对象——差分后的数组进行操作。在上一道题目的基础上还有小的变动——若连续子序列和为负，可选择不买入，即取0.</p>
+<h4><span id="代码">代码</span></h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>* prices, <span class="keyword">int</span> pricesSize)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 注意特殊情况</span></span><br><span class="line">    <span class="keyword">if</span> (pricesSize &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> ans;</span><br><span class="line">	<span class="keyword">int</span> diff[pricesSize];</span><br><span class="line">	<span class="keyword">int</span> dp[pricesSize];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; pricesSize - <span class="number">1</span>; i++ )</span><br><span class="line">	&#123;</span><br><span class="line">		diff[i] = prices[i+<span class="number">1</span>] - prices[i];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	dp[<span class="number">0</span>] = diff[<span class="number">0</span>] &gt; <span class="number">0</span> ? diff[<span class="number">0</span>]:<span class="number">0</span>;</span><br><span class="line">	ans = dp[<span class="number">0</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意数组边界</span></span><br><span class="line">	<span class="keyword">for</span> ( i = <span class="number">1</span>; i &lt; pricesSize - <span class="number">1</span>; i++ )</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>]+diff[i] &gt; <span class="number">0</span> ? dp[i<span class="number">-1</span>]+diff[i]:<span class="number">0</span>;</span><br><span class="line">		ans = dp[i] &gt; ans ? dp[i] : ans;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="写在后面">写在后面</span></h4>
+<p>​	有一个民间题解是用一个方法解决了6道买卖股票题目，后期待补充。这道题的转化思想比其他题目的小变数对我来说更困难。</p>
+<p><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/121-mai-mai-gu-piao-de-zui-jia-shi-ji-dp-7-xing-ji/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/121-mai-mai-gu-piao-de-zui-jia-shi-ji-dp-7-xing-ji/</a></p>
+<p>​	<strong>请注意特殊情况、边界、实际的转移方程、初始情况。</strong></p>
+<h3><span id="198打家劫舍">198.打家劫舍</span></h3>
+<h4><span id="题目要求">题目要求</span></h4>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight <strong>without alerting the police</strong>.</p>
+<h4><span id="解题思路">解题思路</span></h4>
+<p>最大强行非连续子序列和，依然可用动态规划来解。细节上要做些调整。</p>
+<h4><span id="代码">代码</span></h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注意特殊情况</span></span><br><span class="line">    <span class="keyword">if</span> (numsSize &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> ans;</span><br><span class="line">	<span class="keyword">int</span> dp[numsSize][<span class="number">2</span>]; <span class="comment">// 0-not rob  1-rob</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	dp[<span class="number">0</span>][<span class="number">1</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	ans = dp[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意数组边界</span></span><br><span class="line">	<span class="keyword">for</span> ( i = <span class="number">1</span>; i &lt; numsSize; i++ )</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][<span class="number">1</span>] = dp[i<span class="number">-1</span>][<span class="number">0</span>] + nums[i];</span><br><span class="line">        dp[i][<span class="number">0</span>] = dp[i<span class="number">-1</span>][<span class="number">1</span>]&gt;dp[i<span class="number">-1</span>][<span class="number">0</span>]?dp[i<span class="number">-1</span>][<span class="number">1</span>]:dp[i<span class="number">-1</span>][<span class="number">0</span>];</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">    i = numsSize <span class="number">-1</span>;</span><br><span class="line">    ans = dp[i][<span class="number">0</span>]&gt;dp[i][<span class="number">1</span>]?dp[i][<span class="number">0</span>]:dp[i][<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="写在后面">写在后面</span></h4>
+<p>​	动规是中学时代一直学不会的东西，大学前三个学期的课程也没太涉及，前几题稍微有点感觉，打算接着做medium。</p>
+<h2><span id="medium">Medium</span></h2>
+<h3><span id="300longest-increasing-subsequence">300.Longest Increasing Subsequence</span></h3>
+<h4><span id="题目要求">题目要求</span></h4>
+<p>Given an unsorted array of integers, find the length of longest increasing subsequence.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>There may be more than one LIS combination, it is only necessary for you to return the length.</li>
+<li>Your algorithm should run in O(<em>n^2</em>) complexity.</li>
+</ul>
+<p><strong>Follow up:</strong> Could you improve it to O(<em>n</em> log <em>n</em>) time complexity?</p>
+<h4><span id="解题思路">解题思路</span></h4>
+<p>求最长上升子列的长度，常见题目。</p>
+<ul>
+<li>
+<p>指数增长</p>
+<ul>
+<li>普通递归，找所有上升子序列，返回长度</li>
+</ul>
+</li>
+<li>
+<p>O(<em>n^2</em>)</p>
+<ul>
+<li>带记忆的递归</li>
+<li>普通dp</li>
+</ul>
+</li>
+<li>
+<p>O(<em>n</em> log <em>n</em>)</p>
+<ul>
+<li>dp+二分搜索</li>
+</ul>
+</li>
+</ul>
+<h4><span id="动态规划">动态规划</span></h4>
+<h5><span id="1-定义状态">1. 定义状态</span></h5>
+<p>首先考虑“题目问什么，就把什么定义成状态”，发现无从下手。但可以基于下面这个事实，考虑状态的定义：</p>
+<blockquote>
+<p>为了从一个较短的上升子序列得到一个较长的上升子序列，我们主要关心这个较短的上升子序列结尾的元素。</p>
+</blockquote>
+<p>为了保证子序列的相对顺序性，在程序读到一个新的数的时候，如果比已经得到的子序列的最后一个数还大，那么就可以放在这个子序列的最后，形成一个更长的子序列。</p>
+<p>一个子序列一定会以一个数结尾，于是将状态定义成：dp[i] 表示以 nums[i] 结尾的“最长上升子序列”的长度，注意这个定义中 nums[i] 必须被选取，且必须被放在最后一个元素。</p>
+<h5><span id="2-状态转移方程">2. 状态转移方程</span></h5>
+<p>遍历到 nums[i] 时，考虑把索引 i 之前的所有的数都看一遍，只要当前的数 nums[i] 严格大于之前的某个数，那么 nums[i] 就可以接在这个数后面形成一个更长的上升子序列。因此，dp[i] 就等于索引 i 之前严格小于 nums[i] 的状态最大者 +1。</p>
+<p>语言描述：在索引 i 之前严格小于 nums[i] 的所有状态中的最大者 + 1。</p>
+<h5><span id="3-初始化">3. 初始化</span></h5>
+<p>dp[0] = 1，1 个字符当然也是长度为 1 的上升子序列；</p>
+<h5><span id="4-输出">4. 输出</span></h5>
+<p>所有 dp[i] 中的最大值（dp[i]考虑了所有以 nums[i] 结尾的上升子序列）</p>
+<h5><span id="5-状态压缩">5. 状态压缩</span></h5>
+<p>之前所有的状态都得保留，因此无法压缩。目前还没有涉及到状态压缩的较难的题目，后期遇到了会整理。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numsSize &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">int</span> ans;</span><br><span class="line">    <span class="keyword">int</span> dp[numsSize];</span><br><span class="line">    <span class="keyword">int</span> maxd;</span><br><span class="line">    </span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        maxd = <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; i; j++ )</span><br><span class="line">        &#123;</span><br><span class="line">			<span class="keyword">if</span> (nums[i] &gt; nums[j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(maxd == <span class="number">-1</span>) maxd = j;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(dp[maxd] &lt; dp[j]) maxd = j;</span><br><span class="line">			&#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(maxd == <span class="number">-1</span>) dp[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> dp[i] = dp[maxd] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">		ans = dp[i]&gt;ans? dp[i]:ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5><span id="相同方法更快一些的写法-别人的代码">相同方法更快一些的写法 - 别人的代码</span></h5>
+<p>很多人都这样写递归。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max(a,b) ((a) &gt; (b)) ? (a) : (b)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLIS</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> *dp = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (nums == <span class="literal">NULL</span> || numsSize == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dp = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(numsSize * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span>(dp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        dp[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; numsSize; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j] &lt; nums[i]) &#123;</span><br><span class="line">                dp[i] = max(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ret = max(ret, dp[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="修改状态定义-贪心算法-二分查找">修改状态定义、贪心算法、二分查找</span></h4>
+<p><a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/</a></p>
+<p>目前还不是很懂，留个链接</p>
+<h4><span id="写在后面">写在后面</span></h4>
+<h3><span id="62不同路径">62.不同路径</span></h3>
+<h4><span id="题目要求">题目要求</span></h4>
+<p>A robot is located at the top-left corner of a <em>m</em> x <em>n</em> grid (marked ‘Start’ in the diagram below).</p>
+<p>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked ‘Finish’ in the diagram below).</p>
+<p>How many possible unique paths are there?</p>
+<p><strong>Note:</strong> <em>m</em> and <em>n</em> will be at most 100.</p>
+<h4><span id="解题思路">解题思路</span></h4>
+<p>离散考过该类题目，私以为用排列组合比用动态规划好，两种方法都尝试。</p>
+<h4><span id="排列组合">排列组合</span></h4>
+<p>实际做起来会炸int 甚至炸long long，如果用其他语言会得到非常棒的结果，可惜我最熟悉的语言还是c，我没有用python的魄力。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="comment">// C(m,m+n)  (m+n)!/m!/n!</span></span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    m--;</span><br><span class="line">    n--;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = m+n; i &gt;= m+<span class="number">1</span>; i-- )</span><br><span class="line">    &#123;</span><br><span class="line">		ans *= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = n; i &gt;= <span class="number">2</span>; i-- ) ans /= i;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="动态规划">动态规划</span></h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="comment">// 特殊状态</span></span><br><span class="line">    <span class="keyword">if</span>(m == <span class="number">0</span>||n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="keyword">int</span> ans;</span><br><span class="line">    <span class="keyword">int</span> dp[m][n];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// initial state</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++) dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) dp[<span class="number">0</span>][i] = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// state change</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; m ; i++ )</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt; n; j++ )</span><br><span class="line">        &#123;</span><br><span class="line">			dp[i][j] = dp[i<span class="number">-1</span>][j] + dp[i][j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// answer</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dp[m<span class="number">-1</span>][n<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="别人的代码-非常快的版本">别人的代码 - 非常快的版本</span></h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(m == <span class="number">0</span> || n == <span class="number">0</span> || m &gt; <span class="number">100</span> || n &gt; <span class="number">100</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">1</span>, k = <span class="number">0</span>, ret;</span><br><span class="line">    <span class="keyword">int</span> **tal = (<span class="keyword">int</span> **)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>*));</span><br><span class="line">    <span class="keyword">for</span>(; k &lt; n; k++)&#123;</span><br><span class="line">        tal[k] = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(m * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">        <span class="comment">//将所有的竖排zhi 1</span></span><br><span class="line">        tal[k][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; m; k++)</span><br><span class="line">        <span class="comment">//将横排zhiwei</span></span><br><span class="line">        tal[<span class="number">0</span>][k] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt; m; j++)&#123;</span><br><span class="line">            tal[i][j] = tal[i<span class="number">-1</span>][j] + tal[i][j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ret = tal[n<span class="number">-1</span>][m<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">0</span>; k &lt; n; k++)&#123;</span><br><span class="line">        <span class="built_in">free</span>(tal[k]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(tal);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="322-coin-change">322. Coin Change</span></h3>
+<h4><span id="题目要求">题目要求</span></h4>
+<p>You are given coins of different denominations and a total amount of money <em>amount</em>. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.</p>
+<h4><span id="解题思路">解题思路</span></h4>
+<p>四年前做过这题…当时是怎么都不能理解…</p>
+<h4><span id="代码">代码</span></h4>
+<p>注意特判。第一步思路，太慢啦。写任何一个方法之前先分析一下复杂度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> min(a,b) ((a) &lt; (b)) ? (a) : (b)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="keyword">int</span>* coins, <span class="keyword">int</span> coinsSize, <span class="keyword">int</span> amount)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (amount == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (coinsSize == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">int</span> i, j, k;</span><br><span class="line">    <span class="keyword">int</span> dp[amount + <span class="number">1</span>];</span><br><span class="line">    </span><br><span class="line">    dp[<span class="number">0</span>] = amount &gt; <span class="number">0</span> ? <span class="number">0</span>:<span class="number">-1</span> ;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= amount; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i] = <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; coinsSize; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (i - coins[j] &gt;= <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                k = i - coins[j];</span><br><span class="line">                <span class="keyword">if</span> (dp[k] &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span> (dp[i] &lt;= <span class="number">0</span>) dp[i] = dp[k]+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> dp[i] = min(dp[i],dp[k]+<span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[amount];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id></span></h4>
+<h3><span id="53跳跃游戏">53.跳跃游戏</span></h3>
+<h4><span id="题目要求">题目要求</span></h4>
+<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p>Each element in the array represents your maximum jump length at that position.</p>
+<p>Determine if you are able to reach the last index.</p>
+<h4><span id="解题思路">解题思路</span></h4>
+<p>动态规划</p>
+<h4><span id="代码">代码</span></h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">bool</span> dp[numsSize];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// special condition</span></span><br><span class="line">    <span class="keyword">if</span> (numsSize == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (numsSize == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// initialize</span></span><br><span class="line">    dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// state change</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= nums[i]; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//special</span></span><br><span class="line">            <span class="keyword">if</span> (i + j &gt;= numsSize) <span class="keyword">continue</span>;</span><br><span class="line">            dp[i+j] = dp[i];            </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// answer    </span></span><br><span class="line">   <span class="keyword">return</span> dp[numsSize<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="后记">后记</span></h2>
+<h3><span id="近况update">近况update</span></h3>
+<h4><span id="2020年2月5日-345-德国杯-多特蒙德-23-不来梅">2020年2月5日 3:45 德国杯  多特蒙德 2:3 不来梅</span></h4>
+<p>​	昨天原本想早睡，可惜德国杯开赛还没睡着，但是也没有看比赛。德国杯输球倒不是很介意，原本三线作战对体力精力都是更大的消耗，趁早出局专注联赛和欧冠未尝不是一件好事。不开心的是，听说Reus状态一般，希望尽快调整叭，真的舍不得某些球迷骂他。队魂不应该被这样刻薄地对待，罗伊斯为多特做出的牺牲太大了，但倘若队长能休息一会找回昔日复出即巅峰的状态或是找回上赛季的感觉，人们会骄欣赏我们的小队员们，“我们有17岁的雷纳，19岁的桑乔和哈兰德，全欧洲最受关注的00后都在我们队里，多特蒙德燃起了另一场青春风暴“，也会骄傲地说，”看，刚刚单刀破门的是我们的队长马尔科·罗伊斯，他是多特蒙德的旗帜！“</p>
+<p>​	祝队长新年一切顺利，还想看你拿沙拉盘、大耳朵杯和欧洲杯呢。今年可是离冠军最近的一年了呢。希望在伊斯坦布尔看到你们！</p>
+<p><img src="2.png" alt="2"></p>
+<h4><span id="今年">今年</span></h4>
+<p>​	2020年真的是很特别的一年，个人的生活、职业生涯自然有很多的变数，与此同时，我们每一个人都心系着2019-ncov疫情。在隔壁省份，我的朋友、我喜欢的小姐姐还有他们的家人正处在风暴中心，我的同胞、我们民族最优秀而勇敢的人们正在尽全力守护这个国家。新年愿望只有一个，风调雨顺，国泰民安。</p>
+<p>​	每逢这种大事，心中对国家和社会的关切总是很容易被激发出来，然而这种责任感很少转化为理性的思考与坚决的行动。诸位要成为主持风气、转移国运的人，凡事要多问问自己：我现在能做些什么？二十年后，我能否比前辈们做得更好？为了以后做得更好，我现在能做些什么？我要成为一个怎样的人？</p>
+<p>​	All in all, 这个世界缺的不是完美的人，而是从心底给出的真心，正义，无谓与同情。</p>
+<h3><span id="reference">Reference</span></h3>
+<ol>
+<li>300题解</li>
+</ol>
+<p>作者：liweiwei1419<br>
+链接：<a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/02/05/No-4-Data-Visualization/No-4-Data-Visualization/" data-toggle="tooltip" data-placement="top" title="No.4 数据可视化进阶 Data Visualization">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Leetcode Day 1 - 动态规划</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">写在前面</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Easy</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">53.最大连续子序和</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.1.</span> <span class="toc-nav-text">题目要求</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.2.</span> <span class="toc-nav-text">解题思路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.3.</span> <span class="toc-nav-text">代码</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">121. 买卖股票的最佳时机</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">题目要求</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.2.2.</span> <span class="toc-nav-text">解题思路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.2.3.</span> <span class="toc-nav-text">代码</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.2.4.</span> <span class="toc-nav-text">写在后面</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">198.打家劫舍</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.3.1.</span> <span class="toc-nav-text">题目要求</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.3.2.</span> <span class="toc-nav-text">解题思路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.3.3.</span> <span class="toc-nav-text">代码</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.3.4.</span> <span class="toc-nav-text">写在后面</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Medium</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">300.Longest Increasing Subsequence</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.1.</span> <span class="toc-nav-text">题目要求</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.2.</span> <span class="toc-nav-text">解题思路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.</span> <span class="toc-nav-text">动态规划</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.1.</span> <span class="toc-nav-text">1. 定义状态</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.2.</span> <span class="toc-nav-text">2. 状态转移方程</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.3.</span> <span class="toc-nav-text">3. 初始化</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.4.</span> <span class="toc-nav-text">4. 输出</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.5.</span> <span class="toc-nav-text">5. 状态压缩</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.3.6.</span> <span class="toc-nav-text">相同方法更快一些的写法 - 别人的代码</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.4.</span> <span class="toc-nav-text">修改状态定义、贪心算法、二分查找</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.1.5.</span> <span class="toc-nav-text">写在后面</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">62.不同路径</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.1.</span> <span class="toc-nav-text">题目要求</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.2.</span> <span class="toc-nav-text">解题思路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.3.</span> <span class="toc-nav-text">排列组合</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.4.</span> <span class="toc-nav-text">动态规划</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.2.5.</span> <span class="toc-nav-text">别人的代码 - 非常快的版本</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">322. Coin Change</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.1.</span> <span class="toc-nav-text">题目要求</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.2.</span> <span class="toc-nav-text">解题思路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.3.</span> <span class="toc-nav-text">代码</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.3.4.</span> <span class="toc-nav-text"></span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">53.跳跃游戏</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.4.1.</span> <span class="toc-nav-text">题目要求</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.4.2.</span> <span class="toc-nav-text">解题思路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.4.3.</span> <span class="toc-nav-text">代码</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">后记</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">近况update</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.1.</span> <span class="toc-nav-text">2020年2月5日 3:45 德国杯  多特蒙德 2:3 不来梅</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.2.</span> <span class="toc-nav-text">今年</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">Reference</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#cs" title="cs">cs</a>
+                        
+                          <a class="tag" href="/tags/#leetcode" title="leetcode">leetcode</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://zhangxy.tech" target="_blank">蛮鱼</a></li>
+                    
+                        <li><a href="http://fenghe.us" target="_blank">Fenghe</a></li>
+                    
+                        <li><a href="http://www.c01dkit.com/" target="_blank">柷敔</a></li>
+                    
+                        <li><a href="http://dingzhi.ga/" target="_blank">DingZhi</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kamzero";
+    var disqus_identifier = "https://kamzero.cn/2020/02/05/leetcode-day-1-dp/";
+    var disqus_url = "https://kamzero.cn/2020/02/05/leetcode-day-1-dp/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/kamliezero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/kamzero">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; kamzero 2020 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://kamzero.cn/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-144253754-1';
+    var _gaDomain = 'undefined';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '8e768ea7fd18877f581950076f9ac0cb';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://kamzero.cn/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

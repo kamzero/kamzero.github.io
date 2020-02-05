@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - kamzero
+          No.4 数据可视化进阶 Data Visualization - kamzero
         
     </title>
 
-    <link rel="canonical" href="https://kamzero.cn/about/">
+    <link rel="canonical" href="https://kamzero.cn/2020/02/05/No-4-Data-Visualization/No-4-Data-Visualization/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/Iron-Man-3.jpg')
-            /*page*/
+            background-image: url('1.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,22 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Wish for the Best, Prepare for the Worst</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#cs" title="cs">cs</a>
+                            
+                              <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                            
+                              <a class="tag" href="/tags/#可视化" title="可视化">可视化</a>
+                            
+                        </div>
+                        <h1>No.4 数据可视化进阶 Data Visualization</h1>
+                        <h2 class="subheading"> Python Data Visualization Cookbook chap.4~8 </h2>
+                        <span class="meta">
+                            Posted by kamzero on
+                            2020-02-05
+                        </span>
                     </div>
                 
 
@@ -189,302 +201,224 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3><span id="who-am-i">Who am I ?</span></h3>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="no4-数据可视化进阶-data-visualization">No.4 数据可视化进阶 Data Visualization</span></h1>
+<h2><span id="前言">前言</span></h2>
+<p>​	写完上一篇可视化的文章总觉得欠缺了些什么，于是找了一本专门讲python可视化的书籍。坦白地讲，这是我看过的最索然无味的技术书籍，可能大多数书籍都是如此吧，食之无味弃之可惜。不想犯眼高手低的毛病，还是浏览了一遍，把书中几个没有画过的图摘出来整理于此，以备不时之需。So，好书就一章一章看，一般的书就一本一本刷。</p>
+<h3><span id="计划实现些什么">计划实现些什么？</span></h3>
 <ul>
-<li>ZJUer</li>
-<li>Dortmund ❤ BVB 09</li>
-</ul>
-<h3><span id="博客存在的意义">博客存在的意义</span></h3>
+<li>2D
 <ul>
-<li>跟家人朋友分享我的生活</li>
-<li>保持输出，总结所学
-<ul>
-<li>如能帮助到他人，实感荣幸</li>
+<li>使用极线条可视化文件系统树</li>
 </ul>
 </li>
-<li>不再自闭</li>
-</ul>
-<h3><span id="如何联系我">如何联系我？</span></h3>
+<li>3D
 <ul>
-<li>邮箱 <a href="mailto:sherry0zero@gmail.com" target="_blank" rel="noopener">sherry0zero@gmail.com</a></li>
-<li>Wechat xiaoran0516</li>
-<li>QQ 446553157</li>
+<li>绘制3D柱状图</li>
+<li>绘制三翼面图</li>
+<li>绘制3D直方图</li>
+</ul>
+</li>
+<li>用图像和地图绘制图表
+<ul>
+<li>使用Google Map API在地图上绘制数据</li>
+</ul>
+</li>
+<li>使用图表理解数据
+<ul>
+<li>火柴杆图</li>
+<li>矢量场流线图</li>
+<li>相关图</li>
+</ul>
+</li>
+<li>其他matplotlib知识</li>
+</ul>
+<h2><span id="使用极线条可视化文件系统树">使用极线条可视化文件系统树</span></h2>
+<h2><span id="用图像和地图绘制图表">用图像和地图绘制图表</span></h2>
+<h3><span id="用pil做图像处理">用PIL做图像处理</span></h3>
+<ul>
+<li>为什么要用python做图像处理？
+<ul>
+<li>创建一个自动化的系统来实时地处理图像，进而优化处理的流程。</li>
+</ul>
+</li>
+</ul>
+<h4><span id="准备工作">准备工作</span></h4>
+<h2><span id="后记">后记</span></h2>
+<h3><span id="写在后面">写在后面</span></h3>
+<h3><span id="近况update">近况update</span></h3>
+<ul>
+<li>个人总结难产，写到一半觉得索然无味，暂时搁置</li>
+<li>刷leetcode
+<ul>
+<li>在博客上会更新整理和题解</li>
+<li>不是为了整理而整理，而是真正有需求需要强化时整理。</li>
+</ul>
+</li>
+<li>准备语言考试</li>
 </ul>
 
-
-                <!-- 如果开启评论功能 -->
                 
-                    <hr>
 
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/2020/02/05/leetcode-day-1-dp/" data-toggle="tooltip" data-placement="top" title="Leetcode Day1 DP">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/02/02/那些远离博客的日子：我的大二上/那些远离博客的日子：我的大二上/" data-toggle="tooltip" data-placement="top" title="那些远离博客的日子：我的大二上">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
-                    
-                    <!-- disqus 评论框 start -->
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
                     <div class="comment">
                         <div id="disqus_thread" class="disqus-thread"></div>
                     </div>
-                    <!-- disqus 评论框 end -->
-                    
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
 
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">No.4 数据可视化进阶 Data Visualization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">前言</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">计划实现些什么？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">使用极线条可视化文件系统树</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">用图像和地图绘制图表</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">用PIL做图像处理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.1.1.</span> <span class="toc-nav-text">准备工作</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">后记</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">写在后面</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">近况update</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
 
-                    
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-                    
-                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = "kamzero";
-                        var disqus_identifier = "https://kamzero.cn/about/index.html";
-                        var disqus_url = "https://kamzero.cn/about/index.html";
-
-                        (function() {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#cs" title="cs">cs</a>
                         
-                    </script>
-                    <!-- disqus 公共JS代码 end -->
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                          <a class="tag" href="/tags/#可视化" title="可视化">可视化</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
                     
+                        <li><a href="http://zhangxy.tech" target="_blank">蛮鱼</a></li>
+                    
+                        <li><a href="http://fenghe.us" target="_blank">Fenghe</a></li>
+                    
+                        <li><a href="http://www.c01dkit.com/" target="_blank">柷敔</a></li>
+                    
+                        <li><a href="http://dingzhi.ga/" target="_blank">DingZhi</a></li>
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#HKU" title="HKU" rel="2">HKU</a>
-            
-        
-            
-            <a href="/tags/#Biology" title="Biology" rel="2">Biology</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#other" title="other" rel="2">other</a>
-            
-        
-            
-            <a href="/tags/#cs" title="cs" rel="11">cs</a>
-            
-        
-            
-            <a href="/tags/#ZJU" title="ZJU" rel="5">ZJU</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#C大程" title="C大程" rel="3">C大程</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#C" title="C" rel="3">C</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Python" title="Python" rel="5">Python</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#随想" title="随想" rel="3">随想</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#可视化" title="可视化" rel="2">可视化</a>
-            
-        
-            
-            <a href="/tags/#ML" title="ML" rel="2">ML</a>
-            
-        
-            
-            <a href="/tags/#集体智慧编程" title="集体智慧编程" rel="2">集体智慧编程</a>
-            
-        
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/ironman-draw.png" />
-        
 
-        
-            <p>Hi, I&#39;m JIAO Sherry</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "kamzero";
+    var disqus_identifier = "https://kamzero.cn/2020/02/05/No-4-Data-Visualization/No-4-Data-Visualization/";
+    var disqus_url = "https://kamzero.cn/2020/02/05/No-4-Data-Visualization/No-4-Data-Visualization/";
 
-            
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
-            
-                <li>
-                    <a target="_blank" href="https://www.facebook.com/kamliezero">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/kamzero">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2020/02/05/leetcode-day-1-dp/">Leetcode Day1 DP</a>
-        </li>
-      
-        <li>
-          <a href="/2020/02/05/No-4-Data-Visualization/No-4-Data-Visualization/">No.4 数据可视化进阶 Data Visualization</a>
-        </li>
-      
-        <li>
-          <a href="/2020/02/02/那些远离博客的日子：我的大二上/那些远离博客的日子：我的大二上/">那些远离博客的日子：我的大二上</a>
-        </li>
-      
-        <li>
-          <a href="/2020/02/01/基于Python的数据可视化/">No.3 基于Python的数据可视化 Data Visualization</a>
-        </li>
-      
-        <li>
-          <a href="/2019/10/17/Enjoy-the-Coding-and-Thinking/">Enjoy the Coding and Thinking</a>
-        </li>
-      
-    </ul>
-  </div>
 
-        <hr>
-    
-        <!-- Friends Blog -->
 
-<h5>FRIENDS</h5>
-<ul class="list-inline">
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-    
-        <li><a href="http://zhangxy.tech" target="_blank">蛮鱼</a></li>
-    
-        <li><a href="http://fenghe.us" target="_blank">Fenghe</a></li>
-    
-        <li><a href="http://www.c01dkit.com/" target="_blank">柷敔</a></li>
-    
-        <li><a href="http://dingzhi.ga/" target="_blank">DingZhi</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
